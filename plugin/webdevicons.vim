@@ -725,7 +725,7 @@ function! AirlineWebDevIcons(...)
   let w:airline_section_x .= prePadding . WebDevIconsGetFileTypeSymbol() . postPadding
   let hasFileFormatEncodingPart = airline#parts#ffenc() != ''
   if g:webdevicons_enable_airline_statusline_fileformat_symbols && hasFileFormatEncodingPart
-    let w:airline_section_y = ' %{&fenc . " " . WebDevIconsGetFileFormatSymbol()} '
+    let w:airline_section_y = prePadding &fenc . " " . WebDevIconsGetFileFormatSymbol() . postPadding
   endif
 endfunction
 
