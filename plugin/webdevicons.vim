@@ -58,6 +58,14 @@ if !exists('g:webdevicons_enable_airline_statusline')
   let g:webdevicons_enable_airline_statusline = 1
 endif
 
+if !exists('g:webdevicons_airline_statusline_glyphpadding_before')
+  let g:webdevicons_airline_statusline_glyphpadding_before = ''
+endif
+
+if !exists('g:webdevicons_airline_statusline_glyphpadding_after')
+  let g:webdevicons_airline_statusline_glyphpadding_after = ''
+endif
+
 if !exists('g:webdevicons_enable_airline_statusline_fileformat_symbols')
   let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 endif
@@ -712,7 +720,9 @@ endfunction
 function! AirlineWebDevIcons(...)
   let w:airline_section_x = get(w:, 'airline_section_x',
         \ get(g:, 'airline_section_x', ''))
-  let w:airline_section_x .= ' %{WebDevIconsGetFileTypeSymbol()} '
+  let prePadding = g:webdevicons_airline_statusline_glyphpadding_before
+  let postPadding = g:webdevicons_airline_statusline_glyphpadding_after
+  let w:airline_section_x .= prePadding . WebDevIconsGetFileTypeSymbol() . postPadding
   let hasFileFormatEncodingPart = airline#parts#ffenc() != ''
   if g:webdevicons_enable_airline_statusline_fileformat_symbols && hasFileFormatEncodingPart
     let w:airline_section_y = ' %{&fenc . " " . WebDevIconsGetFileFormatSymbol()} '
